@@ -54,7 +54,8 @@
             .attr("y", (d)=>(h-zoom*d[1]))
             .attr("width", "25")
             .attr("height", (d)=>(zoom*d[1]))
-            .attr("fill", "navy")
+            .attr("fill", "navy")            
+            .append("title").text((d)=>(d[0]+"\n"+"$" + d[1] + " Billion"))
             //;
         }
     </script>
