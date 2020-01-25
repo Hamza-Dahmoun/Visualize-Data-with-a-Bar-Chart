@@ -19,7 +19,7 @@
             let url = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json";
             fetch(url).then(response => response.json()).then(data => {
                 console.log(data.data);
-                visualizeData();
+                visualizeData(data.data);
                 });
             //data.data becuz: first data is the argument of "then", second data is a property in the returned object, this property is an array
             /*from fcc
@@ -31,8 +31,8 @@
             */
         }
 
-        function visualizeData(){
-            let dataset = [
+        function visualizeData(dataset){
+            /*let dataset = [
                 [ "1947-01-01", 243.1 ],
                 [ "1947-04-01", 246.3 ],
                 [ "1947-07-01", 250.1 ],
@@ -44,7 +44,7 @@
                 [ "1949-01-01", 275.4 ],
                 [ "1949-04-01", 271.7 ],
                 [ "1949-07-01", 273.3 ],
-            ];
+            ];*/
 
             const w=500;
             const h=500;
