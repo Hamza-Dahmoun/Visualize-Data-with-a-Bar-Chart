@@ -4,10 +4,10 @@
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
     <style>
-    .bar:hover{
-        transition-duration: 0.8s;
-        opacity:0.3;
-    }
+        .bar:hover {
+            transition-duration: 0.8s;
+            opacity: 0.3;
+        }
     </style>
 </head>
 
@@ -20,7 +20,7 @@
             fetch(url).then(response => response.json()).then(data => {
                 console.log(data.data);
                 visualizeData(data.data);
-                });
+            });
             //data.data becuz: first data is the argument of "then", second data is a property in the returned object, this property is an array
             /*from fcc
             The first line is the one that makes the request. So, fetch(URL) makes a GET request to the URL specified. The method returns a Promise.
@@ -31,7 +31,7 @@
             */
         }
 
-        function visualizeData(dataset){
+        function visualizeData(dataset) {
             /*let dataset = [
                 [ "1947-01-01", 243.1 ],
                 [ "1947-04-01", 246.3 ],
@@ -46,23 +46,45 @@
                 [ "1949-07-01", 273.3 ],
             ];*/
 
-            const w=500;
-            const h=500;
-            const padding = 60;
+            const w = 800;
+            const h = 500;
+            const padding = 10;
+            const barWidth = 3;
 
             //adding svg tag to the body with height and width
             const svg = d3.selectAll("body").append("svg").attr("width", w).attr("height", h);
 
+            //adding scales
+            //const xScale = d3.scaleLinear().domain([0, d3.max(dataset, (d)=>d[0].slice(0,4))]).range([padding, w-padding]);
+            var xScale = d3.scaleTime()
+                .domain([
+                    d3.min(dataset, (d) => new Date(d[0])),
+                    d3.max(dataset, (d) => new Date(d[0]))
+                ])
+                .range([padding, w - padding]);
+
+            const yScale = d3.scaleLinear().domain([0, d3.max(dataset, (d) => d[1])]).range([h - padding, padding]);
+
+
+
             //adding rect svg tags using the dataset
-            let zoom = 1;
-            svg.selectAll("rect").data(dataset).enter().append("rect")
-            .attr("x", (d, i)=>(i*26))
-            .attr("y", (d)=>(h-zoom*d[1]))
-            .attr("width", "25")
-            .attr("height", (d)=>(zoom*d[1]))
-            .attr("fill", "navy")       
-            .attr("class", "bar")     
-            .append("title").text((d)=>(d[0]+"\n"+"$" + d[1] + " Billion"))
+            //let zoom = 1;
+            svg.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d) => xScale(new Date(d[0])))
+                .attr("y", (d) => yScale(d[1]))
+                /* WITHOUT SCALES
+                .attr("x", (d, i)=>(i*26))
+                .attr("y", (d)=>(h-zoom*d[1]))
+                */
+                .attr("width", barWidth)
+                .attr("height", (d) => (d[1]))
+
+                .attr("fill", "navy")
+                .attr("class", "bar")
+                .append("title").text((d) => (d[0] + "\n" + "$" + d[1] + " Billion"))
             //;
         }
     </script>
