@@ -95,12 +95,14 @@
             //adding xAxis
             const xAxis = d3.axisBottom(xScale);//this is the xAxis that we'll use with 'g' element in a call() method
             svg.append("g")
+            .attr("id", "x-axis")
                 .attr("transform", "translate(0, " + (h - padding) + ")")//we'll move the xAxis to the bottom of the svg
                 .call(xAxis);
 
             //adding yAxis
             const yAxis = d3.axisLeft(yScale);//this is the yAxis that we'll use with 'g' element in a call() method
             svg.append("g")
+            .attr("id", "y-axis")
                 .attr("transform", "translate(" + padding + ", 0)")//we'll move the yAxis to the extreme left of the svg
                 .call(yAxis);
 
@@ -110,6 +112,7 @@
                 .attr("y", 0 + padding)//setting the y of text element to start the top of the svg element
                 .attr("text-anchor", "middle")//this will make the text perfectly centered (setting only the x is not enough)
                 .attr("fill", "black")//setting text color to black
+                .attr("id", "title")
                 .style("font-size", "20px")
                 .text("United States GDP (Quarterly)");
 
