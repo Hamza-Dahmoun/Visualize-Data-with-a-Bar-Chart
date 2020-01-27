@@ -9,6 +9,11 @@
             opacity: 0.3;
         }
 
+        .tick {
+            font-size: 12px;
+            fill: #555;
+        }
+
         div {
             border: 1px solid #efefef;
             display: flex;
@@ -95,16 +100,20 @@
             //adding xAxis
             const xAxis = d3.axisBottom(xScale);//this is the xAxis that we'll use with 'g' element in a call() method
             svg.append("g")
-            .attr("id", "x-axis")
+                .attr("id", "x-axis")
                 .attr("transform", "translate(0, " + (h - padding) + ")")//we'll move the xAxis to the bottom of the svg
                 .call(xAxis);
 
             //adding yAxis
-            const yAxis = d3.axisLeft(yScale);//this is the yAxis that we'll use with 'g' element in a call() method
+            const yAxis = d3.axisLeft(yScale)//this is the yAxis that we'll use with 'g' element in a call() method
+                ;
             svg.append("g")
-            .attr("id", "y-axis")
+                .attr("id", "y-axis")
                 .attr("transform", "translate(" + padding + ", 0)")//we'll move the yAxis to the extreme left of the svg
                 .call(yAxis);
+
+            //adding a "tick" class to all ticks svg elements of both axes
+            svg.selectAll("ticks").attr("class", "tick");
 
             //adding the text 'United States GDP' in top center of the svg element
             svg.append("text")//appending a text element to the svg
