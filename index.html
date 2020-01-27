@@ -8,7 +8,11 @@
             transition-duration: 0.8s;
             opacity: 0.3;
         }
+        div{
+            border:1px solid red;
+        }
     </style>
+    <div></div>
 </head>
 
 <body>
@@ -52,7 +56,7 @@
             const barWidth = 3;
 
             //adding svg tag to the body with height and width
-            const svg = d3.selectAll("body").append("svg").attr("width", w).attr("height", h);
+            const svg = d3.selectAll("div").append("svg").attr("width", w).attr("height", h);
 
             //adding scales
             //const xScale = d3.scaleLinear().domain([0, d3.max(dataset, (d)=>d[0].slice(0,4))]).range([padding, w-padding]);
@@ -62,30 +66,30 @@
                     d3.max(dataset, (d) => new Date(d[0]))
                 ])
                 .range([padding, w - padding]);
-
-            const yScale = d3.scaleLinear().domain([0, d3.max(dataset, (d) => d[1])]).range([h - padding, padding]);
+            const yScale = d3.scaleLinear().domain([0, d3.max(dataset, (d) => d[1])]).range([(h - padding), padding]);
 
 
 
             //adding rect svg tags using the dataset
-            //let zoom = 1;
             svg.selectAll("rect")
                 .data(dataset)
                 .enter()
                 .append("rect")
                 .attr("x", (d) => xScale(new Date(d[0])))
                 .attr("y", (d) => yScale(d[1]))
-                /* WITHOUT SCALES
-                .attr("x", (d, i)=>(i*26))
-                .attr("y", (d)=>(h-zoom*d[1]))
-                */
                 .attr("width", barWidth)
                 .attr("height", (d) => (d[1]))
-
                 .attr("fill", "navy")
                 .attr("class", "bar")
-                .append("title").text((d) => (d[0] + "\n" + "$" + d[1] + " Billion"))
-            //;
+                .append("title").text((d) => (d[0] + "\n" + "$" + d[1] + " Billion"));
+
+                //adding xAxis
+                const xAxis = d3.axisBottom(xScale);
+                svg.append("g")
+                .attr("transform", "translate(0, " + (h-padding) + ")")
+                .call(xAxis);                
+
+
         }
     </script>
 </body>
