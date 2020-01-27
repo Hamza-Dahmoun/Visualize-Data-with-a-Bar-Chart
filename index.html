@@ -116,7 +116,7 @@
                 .on("mouseover", function (d) {
                     //we'll display the div stored in the variable tooltip
                     tooltip
-                        .html(d[0] + "\n" + d[1] + " $")//setting the text onside the div tooltip
+                        .html(dataToString(d[0]) + "\n" + d[1] + " $")//setting the text onside the div tooltip
                         /*
                          THIS USES THE MOUSE POSITION AND ADD 10 PX TO IT AND SHOW THE TOOLTIP DIV
                         .style("left", d3.event.pageX + 10 + "px")
@@ -180,6 +180,32 @@
                 ;
 
         }
+
+        function dataToString(date) {
+            //this function converts a date YYYY-MM-DD to YYYY/Q1-YYYY/Q2-YYYY/Q3-YYYY/Q4
+            let s = date.slice(0, 4);//'s' will take a slice from 'date' that starts from index 0 and ends at index 3 (index 4 is excluded)
+            let month = date.slice(5, 7);
+            switch (date.slice(5, 7)) {
+                case "01":
+                    s = s + " / Q4";
+                    break;
+                case "04":
+                    s = s + " / Q1";
+                    break;
+                case "07":
+                s = s + " / Q2";
+                    break;
+                case "10":
+                s = s + " / Q3";
+                    break;
+
+                default:
+                s = date;
+                    break;
+            }
+            return s;
+        }
+
     </script>
 </body>
 
