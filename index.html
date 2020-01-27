@@ -10,6 +10,7 @@
         }
         div{
             border:1px solid red;
+            display:flex;flex-direction: row;justify-content: center;
         }
     </style>
     <div></div>
@@ -78,7 +79,7 @@
                 .attr("x", (d) => xScale(new Date(d[0])))
                 .attr("y", (d) => yScale(d[1]))
                 .attr("width", barWidth)
-                .attr("height", (d) => (d[1]))
+                .attr("height", (d) => h-padding-yScale(d[1]))
                 .attr("fill", "navy")
                 .attr("class", "bar")
                 .append("title").text((d) => (d[0] + "\n" + "$" + d[1] + " Billion"));
@@ -86,8 +87,10 @@
                 //adding xAxis
                 const xAxis = d3.axisBottom(xScale);
                 svg.append("g")
-                .attr("transform", "translate(0, " + (h-padding) + ")")
-                .call(xAxis);                
+                .attr("transform", "translate(0, " + (h-padding) + ")")//we'll move the xAxis to the bottom of the svg
+                .call(xAxis);
+
+                             
 
 
         }
