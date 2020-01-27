@@ -90,7 +90,11 @@
                 .attr("transform", "translate(0, " + (h-padding) + ")")//we'll move the xAxis to the bottom of the svg
                 .call(xAxis);
 
-                             
+               //adding yAxis
+               const yAxis = d3.axisLeft(yScale);
+                svg.append("g")
+                .attr("transform", "translate(" + padding + ", 0)")//we'll move the yAxis to the extreme left of the svg
+                .call(yAxis);                 
 
 
         }
