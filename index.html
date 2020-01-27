@@ -50,7 +50,7 @@
             const w = 800;
             const h = 500;
             const padding = 50;
-            const barWidth = 3;
+            const barWidth = w/dataset.length/*3*/;
 
             //adding svg tag to the body with height and width
             const svg = d3.selectAll("div").append("svg").attr("width", w).attr("height", h);
@@ -84,7 +84,7 @@
                 .attr("class", "bar")//adding a class to the rect elements so that it will have a hover effect
                 .attr("data-date", (d)=>d[0])//set a new attribute "data-date" for each rect element to store 'date' information
                 .attr("data-gdp", (d)=>d[1])//set a new attribute "data-gdp" for each rect element to store 'gdp' information
-                .append("title").attr("id", "tooltip").text((d) => (d[0] + "\n" + "$" + new Date(d[1]) + " Billion"))//adding a title to every rect element that will be displayed once user hover over a bar
+                .append("title").attr("id", "tooltip").text((d) => (new Date(d[0]) + "\n" + "$" + d[1] + " Billion"))//adding a title to every rect element that will be displayed once user hover over a bar
                 ;
 
             //adding xAxis
