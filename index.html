@@ -169,14 +169,13 @@
                 .text("United States GDP (Quarterly)");
 
 
-                //adding the vertical text "GDP (Billion $)" next to the y-axis
-                svg.append("text")                                
-                .attr("x", padding)
-                .attr("y", h)                                
-                .attr("transform", "translate("+ -430 +","+ (padding+50) +") rotate(-90)")//I still do not understand how this line worked, i was trying values in the translate method
-                .attr("font-size", "15px")
+            //adding the vertical text "GDP (Billion $)" next to the y-axis
+            svg.append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('x', -50)//I set this value by changing & testing & checking
+                .attr('y', 70)
                 .attr("text-anchor", "end")
-                .text("GDP (Billion $)")
+                .text('GDP (Billion $)');
 
 
 
@@ -204,14 +203,14 @@
                     s = s + " / Q1";
                     break;
                 case "07":
-                s = s + " / Q2";
+                    s = s + " / Q2";
                     break;
                 case "10":
-                s = s + " / Q3";
+                    s = s + " / Q3";
                     break;
 
                 default:
-                s = date;
+                    s = date;
                     break;
             }
             return s;
