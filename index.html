@@ -116,7 +116,7 @@
                 .on("mouseover", function (d) {
                     //we'll display the div stored in the variable tooltip
                     tooltip
-                        .html(dataToString(d[0]) + "\n" + d[1] + " $")//setting the text onside the div tooltip
+                        .html(dateToString(d[0]) + "\n" + d[1] + " $")//setting the text onside the div tooltip
                         /*
                          THIS USES THE MOUSE POSITION AND ADD 10 PX TO IT AND SHOW THE TOOLTIP DIV
                         .style("left", d3.event.pageX + 10 + "px")
@@ -169,6 +169,17 @@
                 .text("United States GDP (Quarterly)");
 
 
+                //adding the vertical text "GDP (Billion $)" next to the y-axis
+                svg.append("text")                                
+                .attr("x", padding)
+                .attr("y", h)                                
+                .attr("transform", "translate("+ -430 +","+ (padding+50) +") rotate(-90)")//I still do not understand how this line worked, i was trying values in the translate method
+                .attr("font-size", "15px")
+                .attr("text-anchor", "end")
+                .text("GDP (Billion $)")
+
+
+
             //adding the text "More Information: http://www.bea.gov/national/pdf/nipaguid.pdf" in the bottom right of the svg element
             svg.append("text")
                 .attr("x", w / 2)
@@ -181,7 +192,7 @@
 
         }
 
-        function dataToString(date) {
+        function dateToString(date) {
             //this function converts a date YYYY-MM-DD to YYYY/Q1-YYYY/Q2-YYYY/Q3-YYYY/Q4
             let s = date.slice(0, 4);//'s' will take a slice from 'date' that starts from index 0 and ends at index 3 (index 4 is excluded)
             let month = date.slice(5, 7);
