@@ -118,14 +118,15 @@
                     tooltip
                         .html(dateToString(d[0]) + "\n" + d[1] + " $")//setting the text onside the div tooltip
                         /*
-                         THIS USES THE MOUSE POSITION AND ADD 10 PX TO IT AND SHOW THE TOOLTIP DIV
+                         THIS USES THE MOUSE POSITION AND ADD 10 PX TO IT AND SHOW THE TOOLTIP DIV*/
                         .style("left", d3.event.pageX + 10 + "px")
-                        .style("top", d3.event.pageY + 10 + "px")
-                        */
-                        /* THIS USES THE BAR POSITION AND PUT THE TOOLTIP DIV ON IT (TOOLTIP DIV WILL BE ON THE TOP OF THE BAR)*/
+                        .style("top", d3.event.pageY + 10 + "px")                        
+                        /* THIS USES THE BAR POSITION AND PUT THE TOOLTIP DIV ON IT (TOOLTIP DIV WILL BE ON THE TOP OF THE BAR)
+                        BUT THIS DIDN't WORK PROPERLY IN DESKTOP SCREENS
                         .style("left", d3.select(this).attr("x") + "px")//gets the bar x attribute value and assign it the 'left' property of tooltip div
                         .style("top", d3.select(this).attr("y") + "px")//gets the bar y attribute value and assign it the 'top' property of tooltip div
-                        .transition()//because we cannot use duration() without using transition()
+                        */
+                        .transition()//because we cannot use duration() without using transition()                        
                         .duration(200)//duration of transition will be 200ms
                         .style("opacity", 0.9)//this is the transition: opacity will be increased from 0 to 0.9
                         ;
