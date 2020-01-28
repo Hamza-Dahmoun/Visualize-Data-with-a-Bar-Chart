@@ -116,7 +116,7 @@
                 .on("mouseover", function (d) {
                     //we'll display the div stored in the variable tooltip
                     tooltip
-                        .html(dateToString(d[0]) + "\n" + d[1] + " $")//setting the text onside the div tooltip
+                        .html(dateToString(d[0]) + "\n" + parseFloat(d[1]).toLocaleString() + " $")//setting the text onside the div tooltip
                         /*
                          THIS USES THE MOUSE POSITION AND ADD 10 PX TO IT AND SHOW THE TOOLTIP DIV*/
                         .style("left", d3.event.pageX + 10 + "px")
